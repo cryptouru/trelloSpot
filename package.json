@@ -4,7 +4,8 @@
   "description": "WyeWorks TakeHome Test",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./src",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "nyc mocha --recursive --require @babel/register",
     "dev": "babel-watch src/index.js",
     "build": "babel ./src --out-dir dist/",
@@ -16,7 +17,6 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
     "@babel/node": "^7.8.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "babel-watch": "^7.0.0",
@@ -34,7 +34,6 @@
     "dotenv": "^8.2.0",
     "lodash": "^4.17.15",
     "spotify-web-api-node": "^4.0.0",
-    "trello": "^0.10.0",
     "trello-node-api": "0.0.9"
   }
 }
