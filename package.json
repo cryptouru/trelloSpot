@@ -4,6 +4,7 @@
   "description": "WyeWorks TakeHome Test",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint ./src",
     "test": "nyc mocha --recursive --require @babel/register",
     "dev": "babel-watch src/index.js",
     "build": "babel ./src --out-dir dist/",
@@ -31,6 +32,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.15",
     "spotify-web-api-node": "^4.0.0",
     "trello": "^0.10.0",
     "trello-node-api": "0.0.9"

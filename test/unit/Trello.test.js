@@ -1,7 +1,3 @@
-/**
- * Greeting class tests.
- */
-
 import { assert } from 'chai';
 import {createBoard, deleteBoard, createList, createCard} from '../../src/Trello';
 
