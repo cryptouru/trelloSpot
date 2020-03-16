@@ -1,5 +1,4 @@
 import { readFileSync } from 'fs'
-import { groupBy } from 'lodash'
 import path from 'path'
 
 export function readDiscography () {
@@ -19,9 +18,4 @@ export function getDiscography () {
     }
   })
   return discography
-}
-
-export function getGroupedDiscography () {
-  const discography = getDiscography()
-  return groupBy(discography, 'decadeId')
 }

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { assert } from 'chai'
-import { createBoard, deleteBoard, createList, createCard } from '../../src/Trello'
+import { createBoard, deleteBoard, createList, createCard, addAttachementToCard } from '../../src/Trello'
 
 describe('Trello', () => {
   describe('Trello borads', () => {
@@ -32,6 +32,18 @@ describe('Trello', () => {
       })
       assert.exists(result.id, 'card id missing')
       assert.equal(result.idList, '5e6d322330ac9a1a005f1edb', 'Incorrect list id')
+    })
+  })
+
+  describe('Add attachement to card', () => {
+    it('Should create a card', async () => {
+      const result = await createCard({
+        name: 'With attachement',
+        idList: '5e6d322330ac9a1a005f1edb'
+      })
+      assert.exists(result.id, 'card id missing')
+      assert.equal(result.idList, '5e6d322330ac9a1a005f1edb', 'Incorrect list id')
+      const attResult = await addAttachementToCard(result.id, 'https://i.scdn.co/image/ab67616d0000b2735954a6441cc1d88011841d1c')
     })
   })
 })
