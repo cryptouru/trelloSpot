@@ -13,7 +13,7 @@ npm istall
 
 Run build and start command to run the full process
   ```bash
-npm build
+npm run build
 npm start
 ```
 Running with the dev command will auto refresh on changes and allow to test without building
