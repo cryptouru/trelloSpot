@@ -9,6 +9,7 @@ Install dependencies
 ```bash
 npm istall
 ```
+Copy .env.example to .env and add the appropiate API credentials
 ## Usage
 
 Run build and start command to run the full process
