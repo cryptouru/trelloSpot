@@ -1,10 +1,10 @@
 import { getDiscography } from './TxtParser'
-import SpotifyWrapper from './Spotify'
+import { getArtistAlbumsWithName } from './Spotify'
 import { groupBy } from 'lodash'
 import { createBoard, createList, createCard, addAttachementToCard } from './Trello'
 
 export async function getAlbumsWithImages () {
-  const discography = await SpotifyWrapper.getArtistAlbumsWithName('Bob Dylan')
+  const discography = await getArtistAlbumsWithName('Bob Dylan')
   const txtDiscography = getDiscography()
   for (const album of txtDiscography) {
     const match = discography.find(disc => disc.name.toLowerCase() === album.name.toLowerCase())
@@ -22,10 +22,10 @@ export async function getGroupedDiscography () {
 
 export async function makeTrelloBoard (name) {
   const discography = await getGroupedDiscography()
-  const newBoard = await createBoard({ name })
+  const newBoard = await createBoard({ name, prefs_permissionLevel: 'public' })
   for (const decade in discography) {
     const decadeArray = discography[decade]
-    const newList = await createList({ name: decade, idBoard: newBoard.id })
+    const newList = await createList({ name: decade, idBoard: newBoard.id, pos: 'bottom' })
     for (const album of decadeArray) {
       const newCard = await createCard({
         name: `${album.year} - ${album.name}`,
@@ -36,4 +36,5 @@ export async function makeTrelloBoard (name) {
       if (album.image) { await addAttachementToCard(newCard.id, album.image) }
     }
   }
+  return newBoard
 }

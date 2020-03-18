@@ -1,8 +1,8 @@
 import { TrelloNodeApi } from 'trello-node-api'
 import axios from 'axios'
 
-const apiKey = process.env.TRELLO_API_KEY || '814e4479ed8d54937ae3b0d7ce9425bb'
-const oauthToken = process.env.TRELLO_OAUTH_TOKEN || '2026b9cda7370c0dcc53b7e1243df19b024b17c639315c1c9788a920ba0acd44'
+const apiKey = process.env.TRELLO_API_KEY || 'ddb32eba256c5b9a208b6d1e93029f20'
+const oauthToken = process.env.TRELLO_OAUTH_TOKEN || 'fbaa076f5d16263b29e0ab61c790ea02369a24bf56ce4a16a936a04f9a5004ba'
 
 const Trello = new TrelloNodeApi()
 Trello.setApiKey(apiKey)

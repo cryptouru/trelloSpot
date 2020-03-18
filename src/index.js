@@ -2,12 +2,12 @@
  * Project entrypoint
  */
 
-import Greeting from './Greetings'
-import { getGroupedDiscography } from './TxtParser'
+import { makeTrelloBoard } from './allTogetherNow'
 
-const g = new Greeting('Test')
-console.info(g.hello())
-
-function process () {
-  const orderedAlbums = getGroupedDiscography
+async function process () {
+  console.log('Starting process')
+  const result = await makeTrelloBoard('Bob dylan discography - public')
+  console.log(`Public short URL: ${result.shortUrl} boardId: ${result.id}`)
 }
+
+process()

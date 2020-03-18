@@ -3,6 +3,19 @@ import { assert } from 'chai'
 import { createBoard, deleteBoard, createList, createCard, addAttachementToCard } from '../../src/Trello'
 
 describe('Trello', () => {
+  let idBoard
+  let idList
+  before(async () => {
+    const board = await createBoard({
+      name: 'Before Test board'
+    })
+    idBoard = board.id
+    const list = await createList({
+      name: 'Test List',
+      idBoard
+    })
+    idList = list.id
+  })
   describe('Trello borads', () => {
     it('Should create and delete a board', async () => {
       const result = await createBoard({
@@ -16,11 +29,11 @@ describe('Trello', () => {
   describe('Trello lists', () => {
     it('Should create a list', async () => {
       const result = await createList({
-        name: 'Test board',
-        idBoard: '5e6d2f89c866ac8d874317aa'
+        name: 'Test list',
+        idBoard
       })
       assert.exists(result.id, 'List id missing')
-      assert.equal(result.idBoard, '5e6d2f89c866ac8d874317aa', 'Board incorrect missing')
+      assert.equal(result.idBoard, idBoard, 'Board incorrect missing')
     })
   })
 
@@ -28,10 +41,10 @@ describe('Trello', () => {
     it('Should create a card', async () => {
       const result = await createCard({
         name: 'Test card',
-        idList: '5e6d322330ac9a1a005f1edb'
+        idList
       })
       assert.exists(result.id, 'card id missing')
-      assert.equal(result.idList, '5e6d322330ac9a1a005f1edb', 'Incorrect list id')
+      assert.equal(result.idList, idList, 'Incorrect list id')
     })
   })
 
@@ -39,11 +52,16 @@ describe('Trello', () => {
     it('Should create a card', async () => {
       const result = await createCard({
         name: 'With attachement',
-        idList: '5e6d322330ac9a1a005f1edb'
+        idList
       })
       assert.exists(result.id, 'card id missing')
-      assert.equal(result.idList, '5e6d322330ac9a1a005f1edb', 'Incorrect list id')
+      assert.equal(result.idList, idList, 'Incorrect list id')
       const attResult = await addAttachementToCard(result.id, 'https://i.scdn.co/image/ab67616d0000b2735954a6441cc1d88011841d1c')
+      assert.equal(attResult.status, 200, 'Status not 200 ok')
     })
+  }).timeout(3000)
+
+  after(async () => {
+    await deleteBoard(idBoard)
   })
 })

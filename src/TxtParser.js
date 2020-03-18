@@ -13,8 +13,7 @@ export function getDiscography () {
     return {
       year,
       name: album.substr(album.indexOf(' ') + 1),
-      decadeId: year.slice(1, 3)
-
+      decadeId: year.slice(0, 3) + 0
     }
   })
   return discography
