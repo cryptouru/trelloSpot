@@ -25,5 +25,17 @@ The test command will run a test suite with a code coverage report
 npm test
 ```
 
+It is also possible to run the process for any given artist name
+  ```bash
+npm run start:custom -- "ARTIST NAME"
+```
+or
+  ```bash
+npm run dev:custom -- "ARTIST NAME"
+```
+Example
+  ```bash
+npm run start:custom -- "Bob Dylan"
+```
 ## License
 [MIT](http://vjpr.mit-license.org)

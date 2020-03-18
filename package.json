@@ -8,8 +8,10 @@
     "lint:fix": "eslint . --fix",
     "test": "nyc --reporter=lcov --reporter=text-summary mocha --recursive --require @babel/register",
     "dev": "babel-watch src/index.js",
+    "dev:custom": "babel-watch src/customArtist.js",
     "build": "babel ./src --out-dir dist/",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "start:custom": "node dist/customArtist.js"
   },
   "author": "",
   "license": "ISC",

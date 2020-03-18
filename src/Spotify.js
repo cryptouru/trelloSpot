@@ -7,13 +7,11 @@ const clientSecret = config.SPOTIFY_CLIENT_SECRET
 let spotifyClient
 
 async function initClient () {
-  // Create the api object with the credentials
   var spotifyApi = new SpotifyWebApi({
     clientId: clientId,
     clientSecret: clientSecret
   })
 
-  // Retrieve an access token.
   const credentials = await spotifyApi.clientCredentialsGrant()
   spotifyApi.setAccessToken(credentials.body.access_token)
   spotifyApi.setRefreshToken(credentials.body.refresh_token)
@@ -22,7 +20,7 @@ async function initClient () {
 
 async function getClient () {
   if (!spotifyClient) {
-    spotifyClient = initClient()
+    spotifyClient = await initClient()
   }
   return spotifyClient
 }

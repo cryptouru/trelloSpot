@@ -15,14 +15,17 @@ export async function getAlbumsWithImages () {
   return txtDiscography
 }
 
-export async function getGroupedDiscography () {
-  const discography = await getAlbumsWithImages()
+export async function getGroupedDiscography (artistName) {
+  let discography
+  if (artistName) discography = await getAlbumsWithImagesWithArtistName(artistName)
+  else discography = await getAlbumsWithImages()
   return groupBy(discography, 'decadeId')
 }
 
-export async function makeTrelloBoard (name) {
+export async function makeTrelloBoard (name, artistName) {
   try {
-    const discography = await getGroupedDiscography()
+    console.log(`Making: ${name} Board`)
+    const discography = await getGroupedDiscography(artistName)
     const newBoard = await createBoard({ name, prefs_permissionLevel: 'public' })
     for (const decade in discography) {
       const decadeArray = discography[decade]
@@ -42,4 +45,17 @@ export async function makeTrelloBoard (name) {
     console.error('Error creating trello board with discography', e)
     return false
   }
+}
+
+export async function getAlbumsWithImagesWithArtistName (name) {
+  const discography = (await getArtistAlbumsWithName(name)).map(album => {
+    const year = album.release_date.slice(0, 4)
+    return {
+      year,
+      name: album.name,
+      decadeId: year.slice(0, 3) + 0,
+      image: album.images[0].url
+    }
+  })
+  return discography
 }
