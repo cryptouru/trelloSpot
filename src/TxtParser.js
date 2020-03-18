@@ -2,7 +2,7 @@ import { readFileSync } from 'fs'
 import path from 'path'
 
 export function readDiscography () {
-  const result = readFileSync(path.join(__dirname, '/files/discography.txt'))
+  const result = readFileSync(path.join(__dirname, '../files/discography.txt'))
   return result.toString()
 }
 

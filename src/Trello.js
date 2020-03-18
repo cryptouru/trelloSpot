@@ -1,8 +1,8 @@
 import { TrelloNodeApi } from 'trello-node-api'
 import axios from 'axios'
 
-const apiKey = process.env.TRELLO_API_KEY || 'ddb32eba256c5b9a208b6d1e93029f20'
-const oauthToken = process.env.TRELLO_OAUTH_TOKEN || 'fbaa076f5d16263b29e0ab61c790ea02369a24bf56ce4a16a936a04f9a5004ba'
+const apiKey = process.env.TRELLO_API_KEY
+const oauthToken = process.env.TRELLO_OAUTH_TOKEN
 
 const Trello = new TrelloNodeApi()
 Trello.setApiKey(apiKey)
@@ -37,7 +37,6 @@ export function createList (listOptions) {
   const defaults = {
     name: 'LIST_NAME', // REQUIRED
     idBoard: 'BOARD_ID', // REQUIRED
-    // idListSource: 'LIST_ID',
     pos: 'top'
   }
   const data = { ...defaults, ...listOptions }
@@ -52,8 +51,6 @@ export function createCard (cardOptions) {
     idList: 'LIST_ID', // REQUIRED
     due: null,
     dueComplete: false,
-    // urlSource: 'https://example.com',
-    // fileSource: 'file',
     keepFromSource: 'attachments,checklists,comments,due,labels,members,stickers'
   }
   const data = { ...defaults, ...cardOptions }

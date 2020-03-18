@@ -21,20 +21,25 @@ export async function getGroupedDiscography () {
 }
 
 export async function makeTrelloBoard (name) {
-  const discography = await getGroupedDiscography()
-  const newBoard = await createBoard({ name, prefs_permissionLevel: 'public' })
-  for (const decade in discography) {
-    const decadeArray = discography[decade]
-    const newList = await createList({ name: decade, idBoard: newBoard.id, pos: 'bottom' })
-    for (const album of decadeArray) {
-      const newCard = await createCard({
-        name: `${album.year} - ${album.name}`,
-        desc: `${album.year} - ${album.name} \n  ${album.image || ''} `,
-        idList: newList.id,
-        pos: 'bottom'
-      })
-      if (album.image) { await addAttachementToCard(newCard.id, album.image) }
+  try {
+    const discography = await getGroupedDiscography()
+    const newBoard = await createBoard({ name, prefs_permissionLevel: 'public' })
+    for (const decade in discography) {
+      const decadeArray = discography[decade]
+      const newList = await createList({ name: decade, idBoard: newBoard.id, pos: 'bottom' })
+      for (const album of decadeArray) {
+        const newCard = await createCard({
+          name: `${album.year} - ${album.name}`,
+          desc: `${album.year} - ${album.name} \n  ${album.image || ''} `,
+          idList: newList.id,
+          pos: 'bottom'
+        })
+        if (album.image) { await addAttachementToCard(newCard.id, album.image) }
+      }
     }
+    return newBoard
+  } catch (e) {
+    console.error('Error creating trello board with discography', e)
+    return false
   }
-  return newBoard
 }

@@ -1,7 +1,8 @@
 import SpotifyWebApi from 'spotify-web-api-node'
+import config from './config'
 
-const clientId = process.env.SPOTIFY_CLIENT_ID || 'cae2dbbf59e04cfb9b8e8dbe08240cb9'
-const clientSecret = process.env.SPOTIFY_CLIENT_SECRET || '777ade2401234af5bcfa28928b681898'
+const clientId = config.SPOTIFY_CLIENT_ID
+const clientSecret = config.SPOTIFY_CLIENT_SECRET
 
 let spotifyClient
 
